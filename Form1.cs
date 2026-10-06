@@ -5,7 +5,7 @@ namespace WinCharts_first_try_nail
 {
     public partial class Form1 : Form
     {
-        double[] dataX = { 1, 2, 3, 4, 5, 6};
+        double[] dataX = { 1, 2, 3, 4, 5, 6 };
         double[] dataY = { 1, 4, 9, 16, 25, 36 };
         ScottPlot.Plot myPlot = new();
         //Добавить переключалку тем
@@ -23,7 +23,7 @@ namespace WinCharts_first_try_nail
             var fillColor = ScottPlot.Color.FromHex("#888888");
 
             formsPlot1.Plot.FigureBackground.Color = new("#1c1c1e");
-            formsPlot1.Plot.Axes.Color(new("#888888"));
+            formsPlot1.Plot.Axes.Color(ScottPlot.Colors.Bisque);
 
             formsPlot1.Plot.Grid.XAxisStyle.FillColor1 = fillColor.WithAlpha(10);
             formsPlot1.Plot.Grid.YAxisStyle.FillColor1 = fillColor.WithAlpha(10);
@@ -41,7 +41,7 @@ namespace WinCharts_first_try_nail
             formsPlot1.Plot.Add.Scatter(dataX, dataY);
             this.Controls.Add(formsPlot1);
             formsPlot1.Refresh();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,6 +49,9 @@ namespace WinCharts_first_try_nail
 
         }
 
+        private void scottPlotStaled1_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
