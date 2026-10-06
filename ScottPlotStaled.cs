@@ -10,7 +10,7 @@ namespace WinCharts_first_try_nail
         protected PlotStyle plotStyle{ get { return _plotStyle; } set { _plotStyle = value; applyStyle(); } }
         public ScottPlotStaled(PlotStyle style) 
         {
-            plotStyle = style;
+            plotStyle = style; 
         }
         public ScottPlotStaled()
         {
