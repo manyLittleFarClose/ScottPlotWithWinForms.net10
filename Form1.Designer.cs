@@ -1,4 +1,4 @@
-﻿namespace WinCharts_first_try_nail
+namespace WinCharts_first_try_nail
 {
     partial class Form1
     {
@@ -38,9 +38,9 @@
             // 
             formsPlot1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             formsPlot1.BackColor = SystemColors.ActiveCaption;
-            formsPlot1.Location = new Point(12, 30);
+            formsPlot1.Location = new Point(0, 39);
             formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new Size(776, 426);
+            formsPlot1.Size = new Size(774, 428);
             formsPlot1.TabIndex = 0;
             // 
             // menuStrip1
@@ -61,13 +61,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 471);
             Controls.Add(formsPlot1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
-           
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

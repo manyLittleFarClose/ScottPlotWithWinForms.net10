@@ -5,9 +5,9 @@ using ScottPlot.WinForms;
 namespace WinCharts_first_try_nail
 {
     /*
-     * Р’ ScottPlot  РїР»РѕС… РґР»СЏ РѕС‚СЂРёСЃРѕРІС‹РІР°РЅРёСЏ РјРёР»Р»РёРѕРЅРѕРІ С‚РѕС‡РµРє
-     * РџРѕ СЌС‚РѕР№ РїСЂРёС‡РёРЅРµ Р±СѓРґРµС‚ РёСЃСЃРїРѕР»СЊР·РѕРІР°РЅ SignalXY
-     * РњРѕР¶РЅРѕ РїРµСЂРµРїРёСЃР°С‚СЊ РїРѕРґ СЂР°Р±РѕС‚Сѓ СЃ РјР°СЃСЃРёРІР°РјРё (РјРµРЅРµРµ Р·Р°С‚СЂР°С‚РЅР°СЏ СЂР°Р±РѕС‚Р° РїРѕ РїР°РјСЏС‚Рё)
+     * В ScottPlot  плох для отрисовывания миллионов точек
+     * По этой причине будет исспользован SignalXY
+     * Можно переписать под работу с массивами (менее затратная работа по памяти)
      */
     
     public partial class Form1 : Form
@@ -17,10 +17,6 @@ namespace WinCharts_first_try_nail
         List<double> dataY = new();
         
         ScottPlot.Plot myPlot = new();
-        private void addStyle()
-        {
-
-        }
         void generateGraphic(List <double> dataX, List <double> dataY)
         { 
             for(int i = 0; i < 20000; i++)
@@ -30,8 +26,16 @@ namespace WinCharts_first_try_nail
                 dataX.Add(k);
             }
         }
-        
-        //Р”РѕР±Р°РІРёС‚СЊ РїРµСЂРµРєР»СЋС‡Р°Р»РєСѓ С‚РµРј
+        PlotStyleMode generateRandomeStyle()
+        {
+            PlotStyleMode StyleMode;
+            Random random = new Random();
+            List<ScottPlot.Color> col = new List<ScottPlot.Color> { ScottPlot.Colors.Gray, ScottPlot.Colors.Aqua, ScottPlot.Colors.Pink, ScottPlot.Colors.DeepPink, ScottPlot.Colors.HotPink, ScottPlot.Colors.LightPink, ScottPlot.Colors.Bisque, ScottPlot.Colors.Brown, ScottPlot.Colors.DarkRed, 
+                ScottPlot.Colors.Gold};
+            StyleMode.AxisColor = random.Next();
+            return ;
+        }
+        //Добавить переключалку тем
         public Form1()
         {
             InitializeComponent();
@@ -39,27 +43,31 @@ namespace WinCharts_first_try_nail
             generateGraphic(dataX, dataY);
             double[] xArray = dataX.ToArray();
             double[] yArray = dataY.ToArray();
+            
             var sig = formsPlot1.Plot.Add.SignalXY(xArray, yArray); ;//Signal(Generate.SquareWaveFromSines());
-            sig.Color = new("#2b9433");
-            sig.LineWidth = 3;
+            stylesPlot.Add(new PlotStyleMode());
+            stylesPlot[0].Apply(formsPlot1);
+            
+            /*
+            IEnumerable<IPlottable> plots = formsPlot1.Plot.GetPlottables();
+            foreach (var p in plots)
+            {
+                if (p is SignalXY s)
+                {
+                    s.Color = new ScottPlot.Color("#ff0000");
+                }
+            }
 
-            var fillColor = ScottPlot.Color.FromHex("#888888");
-            formsPlot1.Plot.FigureBackground.Color = new("#1c1c1e");
-            formsPlot1.Plot.Axes.Color(new("#888888"));
-            formsPlot1.Plot.Grid.XAxisStyle.FillColor1 = fillColor.WithAlpha(0.1f);
-            formsPlot1.Plot.Grid.YAxisStyle.FillColor1 = fillColor.WithAlpha(0.1f);
-
-            formsPlot1.Plot.DataBackground.Color = ScottPlot.Colors.DarkGrey;
-
-            formsPlot1.Plot.Grid.XAxisStyle.MajorLineStyle.Color = ScottPlot.Colors.White.WithAlpha(0.15f);
-            formsPlot1.Plot.Grid.YAxisStyle.MajorLineStyle.Color = ScottPlot.Colors.White.WithAlpha(0.15f);
-            formsPlot1.Plot.Grid.XAxisStyle.MinorLineStyle.Color = ScottPlot.Colors.White.WithAlpha(0.05f);
-            formsPlot1.Plot.Grid.YAxisStyle.MinorLineStyle.Color = ScottPlot.Colors.White.WithAlpha(0.05f);
-
-            formsPlot1.Plot.Grid.XAxisStyle.MinorLineStyle.Width = 1;
-            formsPlot1.Plot.Grid.YAxisStyle.MinorLineStyle.Width = 1;
-
-           
+            foreach (var p in plots)
+            {
+                if (p is SignalXY)
+                {
+                    SignalXY s = (SignalXY) p ;
+                    s.Color = new ScottPlot.Color("#ff0000");
+                }
+            }
+            */
+            
             formsPlot1.Refresh();
             
         }
